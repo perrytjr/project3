@@ -10,7 +10,7 @@ function App() {
   <Router>
     <div>
       <Wrapper>
-      <Route exact path ="/" component={Login} />
+        <Route exact path ="/" component={Login} />
         <Route exact path ="/Login" component={Login} />
         <Route exact path ="/Home" component={Home} />
       </Wrapper>
@@ -21,4 +21,4 @@ function App() {
 
 export default App;
 
-// /components/pages/Home.js
+
