@@ -6,13 +6,14 @@ import Card from "../Card/Card";
 
 class Home extends Component {
     state = {
-      image: "",
+      picture: "",
       name: "",
       match: false
+      
     };
 
 
-  // When the component mounts, load the next dog to be displayed
+  // When the component mounts, load the next user to be displayed
   componentDidMount() {
     this.loadNextUser()
   }
@@ -25,32 +26,33 @@ class Home extends Component {
     const newState = { ...this.state };
 
     if (btnType === "pick") {
-      // Set newState.match to either true or false depending on whether or not the dog likes us (1/5 chance)
+      // Set newState.match to either true or false depending on whether or not the user likes us (1/5 chance)
       newState.match = 1 === Math.floor(Math.random() * 5) + 1;
 
-      // Set newState.matchCount equal to its current value or its current value + 1 depending on whether the dog likes us
+      // Set newState.matchCount equal to its current value or its current value + 1 depending on whether the user likes us
       newState.matchCount = newState.match
         ? newState.matchCount + 1
         : newState.matchCount;
     } else {
-      // If we thumbs down'ed the dog, we haven't matched with it
+      // If we thumbs down'ed the user, we haven't matched with it
       newState.match = false;
     }
-    // Replace our component's state with newState, load the next dog image
+    // Replace our component's state with newState, load the next user picture
     this.setState(newState);
     this.loadNextUser();
   };
 
   loadNextUser = () => {
+    
     API.getRandomUser()
       .then(res =>
-        this.setState({
-          image: res.data.message
+        this.setState({         
+          users: res.data.results
         })
       )
       .catch(err => console.log(err));
   };
-
+  
   render() {
     return (
       <div>
@@ -58,9 +60,9 @@ class Home extends Component {
         <h3 className="text-center">
           Thumbs up on any mates you'd like to meet!
         </h3>
-        <Card image={this.state.image} handleBtnClick={this.handleBtnClick} />
+        <Card picture={this.state.picture} handleBtnClick={this.handleBtnClick} />
         <h1 className="text-center">
-          Made friends with {this.state.matchCount} pups so far!
+          Made friends with {this.state.matchCount} creeps so far!
         </h1>
         {/* <Alert style={{ opacity: this.state.match ? 1 : 0 }} type="success">
           Yay! That Pup Liked You Too!!!
