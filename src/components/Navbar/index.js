@@ -6,11 +6,13 @@ import "./style.css";
 function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <Link className="navbar-brand" to="/discover">
-        Solemate
+      <Link className="navbar-brand" to="/">
+        SoleMate
       </Link>
       <div>
         <ul className="navbar-nav">
+          
+        
           <li className="nav-item">
             <Link
               to="/discover"
@@ -19,14 +21,7 @@ function Navbar() {
               Discover
             </Link>
           </li>
-          <li className="nav-item">
-            <Link
-              to="/chat"
-              className={window.location.pathname === "/chat" ? "nav-link active" : "nav-link"}
-            >
-              Chat
-            </Link>
-          </li>
+        
         </ul>
       </div>
     </nav>
