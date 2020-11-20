@@ -1,0 +1,216 @@
+{
+    "results": [
+        {
+            "name": {
+                "title": "Mrs",
+                "first": "Hazel",
+                "last": "Reyes"
+            },
+            "activities":{
+                "1":"running",
+                "2":"swimming",
+                "3":"cycling"
+
+            },
+            "dob": {
+                "age": 48
+            },
+            
+            "picture": {
+                "large": "https://randomuser.me/api/portraits/men/48.jpg",
+                "medium": "https://randomuser.me/api/portraits/med/men/48.jpg",
+                "thumbnail": "https://randomuser.me/api/portraits/thumb/men/48.jpg"
+            }
+        },
+        {
+            "name": {
+                "title": "Mr",
+                "first": "Shawn",
+                "last": "Bowman"
+            },
+            "activities":{
+                "1":"running",
+                "2":"swimming",
+                "3":"cycling"
+
+            },
+            "dob": {
+                "age": 48
+            },
+            "picture": {
+                "large": "https://randomuser.me/api/portraits/men/5.jpg",
+                "medium": "https://randomuser.me/api/portraits/med/men/5.jpg",
+                "thumbnail": "https://randomuser.me/api/portraits/thumb/men/5.jpg"
+            }
+        },
+        {
+            "name": {
+                "title": "Mr",
+                "first": "Jamie",
+                "last": "Porter"
+            },
+            "activities":{
+                "1":"running",
+                "2":"swimming",
+                "3":"cycling"
+
+            },
+            "dob": {
+                "age": 48
+            },
+            "picture": {
+                "large": "https://randomuser.me/api/portraits/men/56.jpg",
+                "medium": "https://randomuser.me/api/portraits/med/men/56.jpg",
+                "thumbnail": "https://randomuser.me/api/portraits/thumb/men/56.jpg"
+            }
+        },
+        {
+            "name": {
+                "title": "Mr",
+                "first": "Freddie",
+                "last": "Black"
+            },
+            "activities":{
+                "1":"running",
+                "2":"swimming",
+                "3":"cycling"
+
+            },
+            "dob": {
+                "age": 48
+            },
+            "picture": {
+                "large": "https://randomuser.me/api/portraits/men/37.jpg",
+                "medium": "https://randomuser.me/api/portraits/med/men/37.jpg",
+                "thumbnail": "https://randomuser.me/api/portraits/thumb/men/37.jpg"
+            }
+        },
+        {
+            "name": {
+                "title": "Ms",
+                "first": "Candice",
+                "last": "Wilson"
+            },
+            "activities":{
+                "1":"running",
+                "2":"swimming",
+                "3":"cycling"
+
+            },
+            "dob": {
+                "age": 48
+            },
+            "picture": {
+                "large": "https://randomuser.me/api/portraits/women/93.jpg",
+                "medium": "https://randomuser.me/api/portraits/med/women/93.jpg",
+                "thumbnail": "https://randomuser.me/api/portraits/thumb/women/93.jpg"
+            }
+
+        },
+        {
+            "name": {
+                "title": "Mr",
+                "first": "Alexander",
+                "last": "Hill"
+            },
+            "activities":{
+                "1":"running",
+                "2":"swimming",
+                "3":"cycling"
+
+            },
+            "dob": {
+                "age": 48
+            },
+            "picture": {
+                "large": "https://randomuser.me/api/portraits/men/99.jpg",
+                "medium": "https://randomuser.me/api/portraits/med/men/99.jpg",
+                "thumbnail": "https://randomuser.me/api/portraits/thumb/men/99.jpg"
+            }
+        },
+        {
+            "name": {
+                "title": "Mrs",
+                "first": "Brandy",
+                "last": "Spencer"
+            },
+            "activities":{
+                "1":"running",
+                "2":"swimming",
+                "3":"cycling"
+
+            },
+            "dob": {
+                "age": 48
+            },
+            "picture": {
+                "large": "https://randomuser.me/api/portraits/women/66.jpg",
+                "medium": "https://randomuser.me/api/portraits/med/women/66.jpg",
+                "thumbnail": "https://randomuser.me/api/portraits/thumb/women/66.jpg"
+            }
+        },
+        {
+            "name": {
+                "title": "Ms",
+                "first": "Dianne",
+                "last": "Lawson"
+            },
+            "activities":{
+                "1":"running",
+                "2":"swimming",
+                "3":"cycling"
+
+            },
+            "dob": {
+                "age": 48
+            },
+            "picture": {
+                "large": "https://randomuser.me/api/portraits/women/70.jpg",
+                "medium": "https://randomuser.me/api/portraits/med/women/70.jpg",
+                "thumbnail": "https://randomuser.me/api/portraits/thumb/women/70.jpg"
+            }
+        },
+        {
+            "name": {
+                "title": "Mr",
+                "first": "Clifford",
+                "last": "Lopez"
+            },
+            "activities":{
+                "1":"running",
+                "2":"swimming",
+                "3":"cycling"
+
+            },
+            "dob": {
+                "age": 48
+            },
+            "picture": {
+                "large": "https://randomuser.me/api/portraits/men/98.jpg",
+                "medium": "https://randomuser.me/api/portraits/med/men/98.jpg",
+                "thumbnail": "https://randomuser.me/api/portraits/thumb/men/98.jpg"
+            }
+        },
+        {
+            "name": {
+                "title": "Mr",
+                "first": "Antonio",
+                "last": "Payne"
+            },
+            "activities":{
+                "1":"running",
+                "2":"swimming",
+                "3":"cycling"
+
+            },
+            "dob": {
+                "age": 48
+            },
+            "picture": {
+                "large": "https://randomuser.me/api/portraits/men/22.jpg",
+                "medium": "https://randomuser.me/api/portraits/med/men/22.jpg",
+                "thumbnail": "https://randomuser.me/api/portraits/thumb/men/22.jpg"
+            }
+        }
+    ]
+}
