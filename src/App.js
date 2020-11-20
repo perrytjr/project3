@@ -1,25 +1,24 @@
-// import './App.css';
-import Wrapper from "./components/Wrapper/Wrapper";
-import Login from "./components/pages/Login"
-import Home from "./components/pages/Home"
+import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
-
+import Discover from "./pages/Discover";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Wrapper from "./components/Wrapper";
 
 function App() {
   return (
-  <Router>
-    <div>
-      <Wrapper>
-        <Route exact path ="/" component={Login} />
-        <Route exact path ="/Login" component={Login} />
-        <Route exact path ="/Home" component={Home} />
-      </Wrapper>
-    </div>
-  </Router>
-    )
+    <Router>
+      <div>
+        <Navbar />
+        <Wrapper>
+          {/* <Route exact path="/" component={About} /> */}
+          <Route exact path="/discover" component={Discover} />
+          
+        </Wrapper>
+        <Footer />
+      </div>
+    </Router>
+  );
 }
 
 export default App;
-
-
