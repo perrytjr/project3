@@ -44,3 +44,107 @@ app.post("/user", (req, res) => {
 app.listen(4000, () => {
     console.log('Server Has Started');
 })
+
+// var express = require('express'),
+//   mongoose = require('mongoose'),
+//   db = require('./models'),
+//   controllers = require('./controllers'),
+//   bodyParser = require('body-parser'),
+//   vegetable = require('./models/vegetable'),
+//   cookieParser = require('cookie-parser'),
+//   session = require('express-session'),
+//   passport = require('passport'),
+//   LocalStrategy = require('passport-local').Strategy;
+
+//  const PORT = process.env.PORT || 3001;
+
+//  var app = express(),
+//   router = express.Router();
+
+// var User = db.User;
+
+// // Define middleware here
+// app.use(express.urlencoded({ extended: true }));
+// app.use(express.json());
+
+// // // Use apiRoutes
+// // app.use("/api", apiRoutes);
+
+// //to config API to use body body-parser and look for JSON in req.body
+// app.use(bodyParser.urlencoded({
+//   extended: true
+// }));
+// app.use(bodyParser.json());
+
+// app.use(cookieParser());
+// app.use(session({
+//   secret: 'spinachsecret007', // change this!
+//   resave: false,
+//   saveUninitialized: false
+// }));
+// app.use(passport.initialize());
+// app.use(passport.session());
+
+// //passport config
+// passport.use(new LocalStrategy(db.User.authenticate()));
+// passport.serializeUser(db.User.serializeUser());
+// passport.deserializeUser(db.User.deserializeUser());
+
+// //Prevent CORS errors
+// app.use(function (req, res, next) {
+//   res.setHeader('Access-Control-Allow-Origin', '*');
+//   res.setHeader('Access-Control-Allow-Credentials', 'true');
+//   res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT,DELETE');
+//   res.setHeader('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers');
+
+//   //Remove caching
+//   res.setHeader('Cache-Control', 'no-cache');
+//   next();
+// });
+
+
+// //auth routes
+// app.get('/api/users', controllers.user.index);
+// app.delete('/api/users/:user_id',controllers.user.destroy);
+// app.post('/signup', function signup(req, res) {
+//   console.log(`${req.body.username} ${req.body.password}`);
+//   User.register(new User({ username: req.body.username }), req.body.password,
+//     function (err, newUser) {
+//       passport.authenticate('local')(req, res, function() {
+//         res.send(newUser);
+//       });
+//     }
+//   )});
+// app.post('/login', passport.authenticate('local'), function (req, res) {
+//   console.log(JSON.stringify(req.user));
+//   res.send(req.user);
+// });
+// app.get('/logout', function (req, res) {
+//   console.log("BEFORE logout", req);
+//   req.logout();
+//   res.send(req);
+//   console.log("AFTER logout", req);
+// });
+
+// app.listen(PORT, function() {
+//   console.log(`api running on ${PORT}`);
+// });
+
+// app.get("*", function(req, res) {
+//   res.sendFile(path.join(__dirname, "./client/build/index.html"));
+// });
+
+
+
+
+// // Serve up static assets (usually on heroku)
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static("client/build"));
+// };
+
+
+// // Connect to the Mongo DB
+// mongoose.connect(
+//   process.env.MONGODB_URI || "mongodb://localhost/soulmate",
+//   { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
+// );
