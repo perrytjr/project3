@@ -76,8 +76,6 @@ function Login() {
               type="text"
               variant="contained"
               color="primary"
-              disabled={this.props.disabled}
-              onClick={() => this.props.onClick()}
             >
               Enter
             </Button>
