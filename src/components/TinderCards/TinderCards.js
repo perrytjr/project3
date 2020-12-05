@@ -4,7 +4,7 @@ import "./TinderCards.css";
 
 import defaultUsers from "../../users";
 
-const params = new URLSearchParams(window.location.search);
+
 
 // for (const param of params) {
 //   console.log(param);
@@ -30,15 +30,18 @@ class TinderCards extends Component {
   }
 
   componentDidMount() {
+    const params = new URLSearchParams(window.location.search);
     let newPerson = {},
       peopleCopy = this.state.people;
+      console.log(params.entries());
 
     for (const [key, value] of params.entries()) {
-      // console.log(key + ':' + value)
+      console.log(key + ':' + value)
       newPerson[key] = value;
     }
     
     peopleCopy.push(newPerson);
+    console.log(peopleCopy);
 
     this.setState({ people: peopleCopy });
   }
