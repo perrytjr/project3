@@ -1,12 +1,18 @@
-body, html, #root, .app, .container {
+body,
+html,
+#root,
+.app,
+.container {
   width: 100%;
   height: 100%;
+  background-color: #282c34;
 }
+
 
 
 .container {
   font-size: 28px;
-  width:100%;
+  width: 100%;
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -15,43 +21,47 @@ body, html, #root, .app, .container {
   background-color: #282c34;
 }
 
-.loginForm {
- box-sizing: border-box;
- width: 100%;
- padding-left: 20px;
- padding-right: 20px;
-}
-
 .inputField {
- padding-top: 16px;
+  padding-top: 16px;
 }
 
 .input {
- box-sizing: border-box;
- outline: none;
- border: solid 2px #1189de;
- border-radius: 4px;
- color: #292929;
- width: 100%;
- padding: 12px;
- font-size: 14px;
- background: rgba(255, 255, 255, 1);
+  box-sizing: border-box;
+  outline: none;
+  border: solid 2px #1189de;
+  border-radius: 4px;
+  color: #292929;
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 1);
+}
+
+.input {
+  box-sizing: border-box;
+  outline: none;
+  border: solid 2px #1189de;
+  border-radius: 4px;
+  color: #292929;
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 1);
+}
+
+.btn {
+  width: 100%;
+  min-width: 280px;
+  color: #565656;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: bold;
+  border: solid 2px #1189de;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
 }
 
 .submitButton {
- padding-top: 16px;
-}
-
-
-.btn {
- width: 100%;
- min-width: 280px;
- color: #565656;
- padding: 12px;
- font-size: 14px;
- font-weight: bold;
- border: solid 2px #1189de;
- border-radius: 4px;
- background-color: #fff;
- cursor: pointer;
+  padding-top: 16px;
 }
