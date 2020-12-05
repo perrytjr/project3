@@ -118,10 +118,10 @@ import Chats from './components/Chats/Chats';
 
 
 function App() {
-  const [username] = useState('');
-  const [userage] = useState('');
-  const [useractivites] = useState('');
-  const [userpicture] = useState('');
+  // const [username] = useState('');
+  // const [userage] = useState('');
+  // const [useractivites] = useState('');
+  // const [userpicture] = useState('');
   
 
   // function handleClick() {
@@ -143,7 +143,7 @@ function App() {
       <Router>
         <Switch>
           <Route path="/chat">
-            <ChatHeader backButton={`/flick?name=${username}&age=${userage}&activities=${useractivites}&picture=${userpicture}`} />
+            <ChatHeader backButton={'/flick'} />
             <Chats/>
           </Route>
           <Route path="/flick">
