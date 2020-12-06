@@ -112,18 +112,30 @@ import ChatHeader from "./components/ChatHeader/ChatHeader";
 import Chats from "./components/Chats/Chats";
 
 function App() {
-<<<<<<< HEAD
-  // const [username] = useState('');
-  // const [userage] = useState('');
-  // const [useractivites] = useState('');
-  // const [userpicture] = useState('');
+
   
-=======
-  const [username] = useState("");
-  const [userage] = useState("");
-  const [useractivites] = useState("");
-  const [userpicture] = useState("");
->>>>>>> main
+  const [username, setUserName] = useState("");
+  const [userage, setUserAge] = useState("");
+  const [useractivities, setUserActivities] = useState("");
+  const [userpicture, setUserPicture] = useState("");
+
+ const handleProfileUpdate = (name, age, activities, picture) => {
+   debugger;
+    setUserName(name);
+    setUserAge(age);
+    setUserActivities(activities);
+    setUserPicture(picture);
+ }
+
+ const getProfileData = () => {
+  debugger;
+    return {
+      username: username,
+      userage: userage,
+      useractivities: useractivities,
+      userpicture: userpicture
+    }
+ }
 
   // function handleClick() {
   //   debugger;
@@ -144,29 +156,26 @@ function App() {
       <Router>
         <Switch>
           <Route path="/chat">
-<<<<<<< HEAD
-            <ChatHeader backButton={'/flick'} />
-            <Chats/>
-=======
             <ChatHeader
               backButton={`/flick?name=${username}
                 &age=${userage}
-                &activities=${useractivites}
+                &activities=${useractivities}
                 &picture=${userpicture}`}
+                profileUpdate={handleProfileUpdate}
+                profileData={getProfileData}
             />
             <Chats />
->>>>>>> main
           </Route>
           
           <Route path="/flick">
             <Header />
-            <TinderCards />
+            <TinderCards profileData={getProfileData} />
             <SwipeButtons />
           </Route>
 
           <Route path="/">
             <div className="container">
-              <Login />
+              <Login profileUpdate={handleProfileUpdate}  />
             </div>
           </Route>
 

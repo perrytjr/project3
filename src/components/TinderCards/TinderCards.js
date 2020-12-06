@@ -30,15 +30,22 @@ class TinderCards extends Component {
   }
 
   componentDidMount() {
-    const params = new URLSearchParams(window.location.search);
+    
+    let profileData = this.props.profileData();
+    // const params = new URLSearchParams(window.location.search);
+    debugger;
     let newPerson = {},
       peopleCopy = this.state.people;
-      console.log(params.entries());
+      // console.log(params.entries());
 
-    for (const [key, value] of params.entries()) {
-      console.log(key + ':' + value)
-      newPerson[key] = value;
-    }
+    newPerson.name = profileData.username;
+    newPerson.age = profileData.userage;
+    newPerson.activities = profileData.useractivities;
+    newPerson.picture = profileData.userpicture;
+    // for (const [key, value] of params.entries()) {
+    //   console.log(key + ':' + value)
+    //   newPerson[key] = value;
+    // }
     
     peopleCopy.push(newPerson);
     console.log(peopleCopy);
