@@ -1,59 +1,23 @@
-import React, { Component } from "react";
+import React from "react";
 import TinderCard from "react-tinder-card";
+import { ProfileContext } from '../../ProfileContext';
 import "./TinderCards.css";
-
-import defaultUsers from "../../users";
-
-
-
-// for (const param of params) {
-//   console.log(param);
-// }
-
-class TinderCards extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      people: defaultUsers,
-    };
-    // // let newPerson = {},
-    // //   peopleCopy = this.state.people;
-
-    // // for (const [key, value] of params.entries()) {
-    // //   // console.log(key + ':' + value)
-    // //   newPerson[key] = value;
-    // // }
-    // // newPerson.picture = null;
-    // // peopleCopy.push(newPerson);
-
-    // this.setState({ people: peopleCopy });
+​
+export default class TinderCards extends React.PureComponent {
+  static contextType = ProfileContext;
+​
+  state = {
+    people: []
   }
-
+​
   componentDidMount() {
-    
-    let profileData = this.props.profileData();
-    // const params = new URLSearchParams(window.location.search);
-    debugger;
-    let newPerson = {},
-      peopleCopy = this.state.people;
-      // console.log(params.entries());
-
-    newPerson.name = profileData.username;
-    newPerson.age = profileData.userage;
-    newPerson.activities = profileData.useractivities;
-    newPerson.picture = profileData.userpicture;
-    // for (const [key, value] of params.entries()) {
-    //   console.log(key + ':' + value)
-    //   newPerson[key] = value;
-    // }
-    
-    peopleCopy.push(newPerson);
-    console.log(peopleCopy);
-
-    this.setState({ people: peopleCopy });
+    const {users} = this.context;
+    console.log('TinderCard users: ', users);
+    this.setState({ people: users });
   }
-
+​
   render() {
+    console.log('render people: ', this.state.people);
     return (
       <div>
         <div className="tinderCards__cardContainer">
@@ -77,11 +41,11 @@ class TinderCards extends Component {
       </div>
     );
   }
-
+​
   // same as this vvv
   // const people =[];
   // people.push("watever")
-
+​
   //(push to an array in React)
   // setPeople([..people])
   // debugger;
