@@ -1,28 +1,71 @@
-<<<<<<< HEAD
-import React, { useState, Component} from 'react';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-=======
 import React, { useState } from "react";
-import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
->>>>>>> main
 import { withRouter } from "react-router-dom";
 import "./Login.css";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 function Login() {
-  const [username, setUserName] = useState("");
-  const [userage, setUserAge] = useState("");
-  const [useractivites, setUserActivities] = useState("");
-  const [userpicture, setUserPicture] = useState("");
-  // console.log(props);
-  // let history = useHistory();
+    //Registration State:
+    const [registerUserName, setRegisterUserName] = useState("");
+    const [registerPassword, setPassword] = useState("");
+    const [registerUserage, setRegisterUserAge] = useState("");
+    const [registerUserActivities, setUserActivities] = useState("");
+    const [userPicture, setUserPicture] = useState("");
+  
+    //Login State:
+    const [loginUserName, setLoginUserName] = useState("");
+    const [loginPassword, setLoginPassword] = useState("");
+
+    const [data, setData] = useState(null)
+
+    //routes:
+    const register = () =>{
+      axios({
+        method: "POST",
+        data: {
+          username: loginUserName,
+          password: loginPassword,
+        },
+        withCredentials: true,
+        url: "http://localhost:4000/register",
+      }).then
+        (res => console.log(res));
+    }
+
+    const login = () => {
+      axios({
+        method: "POST",
+        data: {
+          username: registerUserName,
+          password: registerPassword
+        },
+        withCredentials: true,
+        url: "http://localhost:4000/login",
+      }).then
+        (res => console.log(res));
+    }
+
+    const getUser = () => {
+      axios({
+        method: "GET",
+        data: {
+          username: registerUserName,
+          password: registerPassword
+        },
+        withCredentials: true,
+        url: "http://localhost:4000/user",
+      }).then
+        (res => setData(res.data));
+    }
+
   return (
     <div>
       <h1 className="loginH1">SoleMate</h1>
 
       <br />
+
+      <h2 className="h2">Registration:</h2>
 
       <form className="loginForm" noValidate autoComplete="off">
         <div className="inputField">
@@ -33,7 +76,19 @@ function Login() {
             label="Full Name"
             placeholder="Full Name"
             variant="outlined"
-            onChange={(event) => setUserName(event.target.value)}
+            onChange={(event) => setRegisterUserName(event.target.value)}
+          />
+        </div>
+
+        <div className="inputField">
+          <input
+            className="input"
+            type="password"
+            id="password"
+            label="Password"
+            placeholder="Password"
+            variant="outlined"
+            onChange={(event) => setPassword(event.target.value)}
           />
         </div>
 
@@ -45,7 +100,7 @@ function Login() {
             label="Age"
             placeholder="Age"
             variant="outlined"
-            onChange={(event) => setUserAge(event.target.value)}
+            onChange={(event) => setRegisterUserAge(event.target.value)}
           />
         </div>
 
@@ -74,7 +129,7 @@ function Login() {
         </div>
 
         <Link
-          to={`/flick?name=${username}&age=${userage}&activities=${useractivites}&picture=${userpicture}`}
+          to={`/flick?name=${registerUserName}&age=${registerUserage}&activities=${registerUserActivities}&picture=${userPicture}`}
         >
           <div className="submitButton">
             <Button
@@ -93,54 +148,3 @@ function Login() {
 }
 
 export default withRouter(Login);
-<<<<<<< HEAD
-
-// class Login extends Component {
-//     constructor(props) {
-//         super(props)
-//         this.state = {
-
-//             fullName: '',
-//             age: '',
-//             activites: '',
-//             picture: ''
-//         }
-//     }
-
-//     addUser = (e) => {
-//         this.setState({ fullName: e.target.value})
-//         this.setState({age: e.target.value})
-//         this.setState({activites: e.target.value})
-//         this.setState({picture: e.target.value})
-//     }
-
-//     render() {
-//         return (
-//             <div>
-//                 <h1>Login to Toogedder</h1>
-//                 <br />
-//                 <form className="inputText" noValidate autoComplete="off">
-//                     <TextField type="text" id="fullName" label="Full Name" variant="outlined" onChange={this.addUser} />
-//                     <br/>
-    
-//                     <TextField  type="text" id="age" label="Age" variant="outlined" onChange={this.addUser} />
-//                     <br/>
-//                     <TextField  type="text" id="activites" label="Activities" variant="outlined" onChange={this.addUser} />
-//                     <br/>
-//                     <TextField  type="text" id="picture" label="Picture" variant="outlined" onChange={this.addUser} />
-//                     <br/>
-//                     <Link to='/flick'>
-//                     <Button  type="text" variant="contained" color="primary">
-//                         Enter
-//                     </Button>
-//                     </Link>
-//                 </form>
-    
-//             </div>
-//         )
-
-//     }
-// }
-// export default withRouter(Login);
-=======
->>>>>>> main

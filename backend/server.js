@@ -1,49 +1,91 @@
-const mongoose = require('mongoose');
-const express = require('express');
-const cors = require('cors');
-const passport = require('passport');
-const passportLocal = require('passport-local').Strategy;
-const cookieParser = require('cookie-parser');
-const bcrypt = require('bcryptjs');
-const session = require('express-session');
-const bodyParser = require('body-parser');
+const mongoose = require("mongoose");
+const express = require("express");
+const cors = require("cors");
+const passport = require("passport");
+const passportLocal = require("passport-local").Strategy;
+const cookieParser = require("cookie-parser");
+const bcrypt = require("bcryptjs");
+const session = require("express-session");
+const bodyParser = require("body-parser");
 
 const app = express();
+const User = require("./models/user")
+
+mongoose.connect(
+  "mongodb+srv://user:user@cluster0.bp2cl.mongodb.net/solemate?retryWrites=true&w=majority",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  },
+  () => {
+    console.log("Mongoose is Connected");
+  }
+);
 
 //Middleware
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: true}))
-app.use(cors({
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(
+  cors({
     origin: "https://localhost:3000",
     credentials: true,
-}))
+  })
+);
 
-app.use(session({
+app.use(
+  session({
     secret: "secretcode",
     resave: true,
-    saveUninitialized: true
-}))
+    saveUninitialized: true,
+  })
+);
 
-app.use(cookieParser("secretcode"))
+app.use(cookieParser("secretcode"));
+app.use(passport.initialize())
+app.use(passport.session)
+require('./passportConfig')(passport )
+
 
 //Routes:
-app.post("/login", (req, res) => {
-    console.log(req.body);
-})
+app.post("/login", (req, res, next) => {
+  passport.authenticate("local", (err, user, info) => {
+      if (err) throw err;
+      if(!user) res.send("No User Exists");
+      else{
+          req.logIn(user, err) => {
+              if (err) throw err;
+              res.send("Successfully Authenticated")
+              console.log(req.user);
+          }
+      }
+  }) 
+  (req, res, next)
+});
 
 app.post("/register", (req, res) => {
-    console.log(req.body);
-})
+  user.findOne({username: req.body.username}, (err,doc) => {
+      if (err) throw err;
+      if (doc) res.send("User Already Exists");
+      if (!doc){
+          const hashPassword = await bcrypt.hash(req.body.password, 10);
+          const newUser = new User({
+              username: req.body.username,
+              password: hashPassword,
+          });
+          await newUser.save();
+          res.send("User Created")
+      }
+  });
+});
 
 app.post("/user", (req, res) => {
-    console.log(req.body);
-})
-
+  res.send(req,user)
+});
 
 //Start the Server
 app.listen(4000, () => {
-    console.log('Server Has Started');
-})
+  console.log("Server Has Started");
+});
 
 // var express = require('express'),
 //   mongoose = require('mongoose'),
@@ -102,7 +144,6 @@ app.listen(4000, () => {
 //   next();
 // });
 
-
 // //auth routes
 // app.get('/api/users', controllers.user.index);
 // app.delete('/api/users/:user_id',controllers.user.destroy);
@@ -134,14 +175,10 @@ app.listen(4000, () => {
 //   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 // });
 
-
-
-
 // // Serve up static assets (usually on heroku)
 // if (process.env.NODE_ENV === "production") {
 //   app.use(express.static("client/build"));
 // };
-
 
 // // Connect to the Mongo DB
 // mongoose.connect(
