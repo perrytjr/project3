@@ -3,7 +3,7 @@ import Button from "@material-ui/core/Button";
 import { withRouter, Redirect } from "react-router-dom";
 import { ProfileContext } from "../../ProfileContext";
 import "./Login.css";
-​
+
 function Login(props) {
   const { dispatch } = useContext(ProfileContext);
   const [userName, setUserName] = useState("");
@@ -11,16 +11,16 @@ function Login(props) {
   const [userActivities, setUserActivities] = useState("");
   const [userPicture, setUserPicture] = useState("");
   const [registered, setRegistered] = useState(false);
-​
+
   if (registered) {
     return (
       <Redirect to='/flick'></Redirect>
     );
   }
-​
+
   const handleOnClick = (e) => {
     e.preventDefault();
-​
+
     let action = {
       name: userName,
       age: userAge,
@@ -31,13 +31,17 @@ function Login(props) {
     dispatch(action);
     setRegistered(true);
   };
-​
+
+  const fileSelectHandler = (e) => {
+    
+  }
+
   return (
     <div>
       <h1 className="loginH1">SoleMate</h1>
-​
+
       <br />
-​
+
       <form className="loginForm" noValidate autoComplete="off">
         <div className="inputField">
           <input
@@ -50,7 +54,7 @@ function Login(props) {
             onChange={(event) => setUserName(event.target.value)}
           />
         </div>
-​
+
         <div className="inputField">
           <input
             className="input"
@@ -62,7 +66,7 @@ function Login(props) {
             onChange={(event) => setUserAge(event.target.value)}
           />
         </div>
-​
+
         <div className="inputField">
           <input
             className="input"
@@ -74,19 +78,19 @@ function Login(props) {
             onChange={(event) => setUserActivities(event.target.value)}
           />
         </div>
-​
+
         <div className="inputField">
           <input
             className="input"
-            type="text"
+            type="input"
             id="picture"
             label="Picture"
             placeholder="Picture URL"
             variant="outlined"
-            onChange={(event) => setUserPicture(event.target.value)}
+           onChange=  {(event) => setUserPicture(event.target.value)}
           />
         </div>
-​
+
         <div className="submitButton">
           <Button
             onClick={handleOnClick}
@@ -102,5 +106,5 @@ function Login(props) {
     </div>
   );
 }
-​
+
 export default withRouter(Login);
