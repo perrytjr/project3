@@ -3,21 +3,22 @@ import "./ChatHeader.css";
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import IconButton from '@material-ui/core/IconButton';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function ChatHeader(props) {
-    const history = useHistory();
+
 
     return (
         <div className="header">
-           
-               <IconButton onClick={() => history.replace(backButton)}>
-                <ArrowBackIosIcon fontSize="large" className="header__ArrowIcon"/> 
-                </IconButton> 
+            <Link to="/flick">
+                <IconButton  >
+                    <ArrowBackIosIcon fontSize="large" className="header__ArrowIcon" />
+                </IconButton>
+            </Link>
 
-                    
-            
-            
+
+
+
             {/* <Link to="/flick">
                 
             <IconButton>
@@ -27,9 +28,9 @@ function ChatHeader(props) {
             </Link> */}
             <h2 className="header__h">Messaging</h2>
             <Link to="/chat">
-            <IconButton>
-                <ChatBubbleIcon className="header__icon" fontSize="large" />
-            </IconButton>
+                <IconButton>
+                    <ChatBubbleIcon className="header__icon" fontSize="large" />
+                </IconButton>
             </Link>
 
         </div>
