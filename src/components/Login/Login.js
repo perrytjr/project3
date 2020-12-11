@@ -32,9 +32,7 @@ function Login(props) {
     setRegistered(true);
   };
 
-  const fileSelectHandler = (e) => {
-    
-  }
+  
 
   return (
     <div>

@@ -6,10 +6,12 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import SwipeButtons from "./components/SwipeButton/SwipeButtons";
 import Login from "./components/Login/Login";
 import ChatHeader from "./components/ChatHeader/ChatHeader";
-import Chats from "./components/Chats/Chats";
+import ChatLogin from './components/ChatLogin/ChatLogin';
+import ChatRoom from './components/ChatRoom/ChatRoom';
 import { ProfileContext } from "./ProfileContext";
 import defaultUsers from "./users";
 import "./App.css";
+// import { RootRef } from "@material-ui/core";
 function useImmerReducer(reducer, initialState) {
     return React.useReducer(produce(reducer), initialState);
 }
@@ -34,16 +36,22 @@ function App() {
     const [users, dispatch] = useImmerReducer(usersReducer, defaultUsers);
     return (
         <div className="App">
+            
             <ProfileContext.Provider
                 value={{ users, dispatch }}
             >
                 <Router>
                     <Switch>
-                        <Route path="/chat">
+                    <Route path="/chatroom" component={ChatRoom}/>
+                        <Route path="/chatlogin">
                             <ChatHeader
                             />
-                            <Chats />
+                            <ChatLogin />
                         </Route>
+                    
+                        {/* <Route path= "/chatroom">
+                            <ChatRoom component={ChatRoom}/>
+                        </Route> */}
                         <Route path="/flick">
                             <Header />
                             <TinderCards />
