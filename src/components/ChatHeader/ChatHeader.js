@@ -5,7 +5,7 @@ import IconButton from '@material-ui/core/IconButton';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { Link, useHistory } from "react-router-dom";
 
-function ChatHeader({backButton}) {
+function ChatHeader(props) {
     const history = useHistory();
 
     return (
