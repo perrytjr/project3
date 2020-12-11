@@ -30,7 +30,7 @@ function Login() {
         withCredentials: true,
         url: "http://localhost:4000/register",
       }).then
-        (res => console.log(res));
+        ((res) => console.log(res));
     }
 
     const login = () => {
@@ -43,7 +43,7 @@ function Login() {
         withCredentials: true,
         url: "http://localhost:4000/login",
       }).then
-        (res => console.log(res));
+        ((res) => console.log(res));
     }
 
     const getUser = () => {
@@ -56,8 +56,7 @@ function Login() {
         withCredentials: true,
         url: "http://localhost:4000/user",
       }).then
-        (res => setData(res.data));
-        console.log(res.data);
+        ((res) => setData(res.data));
     }
 
   return (
