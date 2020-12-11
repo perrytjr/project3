@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import { withRouter } from "react-router-dom";
@@ -59,14 +60,54 @@ function Login() {
         ((res) => setData(res.data));
     }
 
+=======
+import React, { useState, useContext } from "react";
+import Button from "@material-ui/core/Button";
+import { withRouter, Redirect } from "react-router-dom";
+import { ProfileContext } from "../../ProfileContext";
+import "./Login.css";
+​
+function Login(props) {
+  const { dispatch } = useContext(ProfileContext);
+  const [userName, setUserName] = useState("");
+  const [userAge, setUserAge] = useState("");
+  const [userActivities, setUserActivities] = useState("");
+  const [userPicture, setUserPicture] = useState("");
+  const [registered, setRegistered] = useState(false);
+​
+  if (registered) {
+    return (
+      <Redirect to='/flick'></Redirect>
+    );
+  }
+​
+  const handleOnClick = (e) => {
+    e.preventDefault();
+​
+    let action = {
+      name: userName,
+      age: userAge,
+      picture: userPicture,
+      activities: userActivities,
+      type: 'ADD_USER'
+    };
+    dispatch(action);
+    setRegistered(true);
+  };
+​
+>>>>>>> main
   return (
     <div>
       <h1 className="loginH1">SoleMate</h1>
-
+​
       <br />
+<<<<<<< HEAD
 
       <h2 className="h2">Registration:</h2>
 
+=======
+​
+>>>>>>> main
       <form className="loginForm" noValidate autoComplete="off">
         <div className="inputField">
           <input
@@ -91,7 +132,7 @@ function Login() {
             onChange={(event) => setPassword(event.target.value)}
           />
         </div>
-
+​
         <div className="inputField">
           <input
             className="input"
@@ -103,7 +144,7 @@ function Login() {
             onChange={(event) => setRegisterUserAge(event.target.value)}
           />
         </div>
-
+​
         <div className="inputField">
           <input
             className="input"
@@ -115,7 +156,7 @@ function Login() {
             onChange={(event) => setUserActivities(event.target.value)}
           />
         </div>
-
+​
         <div className="inputField">
           <input
             className="input"
@@ -127,6 +168,7 @@ function Login() {
             onChange={(event) => setUserPicture(event.target.value)}
           />
         </div>
+<<<<<<< HEAD
 
         <Link
           to={`/flick?name=${registerUserName}&age=${registerUserage}&activities=${registerUserActivities}&picture=${userPicture}`}
@@ -142,9 +184,23 @@ function Login() {
             </Button>
           </div>
         </Link>
+=======
+​
+        <div className="submitButton">
+          <Button
+            onClick={handleOnClick}
+            className="btn"
+            type="text"
+            variant="contained"
+            color="primary"
+          >
+            Enter
+          </Button>
+        </div>
+>>>>>>> main
       </form>
     </div>
   );
 }
-
+​
 export default withRouter(Login);
