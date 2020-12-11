@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
-import { produce } from "immer";
-​
+import { produce } from "immer"
 import Header from "./components/Header/Header";
 import TinderCards from "./components/TinderCards/TinderCards";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -10,15 +9,14 @@ import Login from "./components/Login/Login";
 import ChatHeader from "./components/ChatHeader/ChatHeader";
 import Chats from "./components/Chats/Chats";
 import { ProfileContext } from "./ProfileContext";
-​
 import defaultUsers from "./users";
-​
+
 import "./App.css";
-​
+
 function useImmerReducer(reducer, initialState) {
   return React.useReducer(produce(reducer), initialState);
 }
-​
+
 const usersReducer = (users, action) => {
   switch(action.type) {
     case 'ADD_USER':
@@ -34,7 +32,7 @@ const usersReducer = (users, action) => {
         picture: action.picture,
         activities: action.activities
       });
-​
+
       // Make a call to DB to insert the new user
       console.log('usersReducer users: ', users);
       return;
@@ -43,10 +41,10 @@ const usersReducer = (users, action) => {
       return users;
   }
 }
-​
+
 export default function App() {
   const [users, dispatch] = useImmerReducer(usersReducer, defaultUsers);
-​
+
   return (
     <div className="App">
       <ProfileContext.Provider
@@ -63,13 +61,13 @@ export default function App() {
               />
               <Chats />
             </Route>
-​
+
             <Route path="/flick">
               <Header />
               <TinderCards />
               <SwipeButtons />
             </Route>
-​
+
             <Route path="/">
               <div className="container">
                 <Login />

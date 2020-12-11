@@ -1,12 +1,17 @@
 import React, { useState, useContext } from "react";
+import "./Login.css";
 import Button from "@material-ui/core/Button";
 import { withRouter, Redirect } from "react-router-dom";
 import { ProfileContext } from "../../ProfileContext";
-import "./Login.css";
-​
+const axios = require('axios').default;
+
+
+
+
 function Login(props) {
   const { dispatch } = useContext(ProfileContext);
   const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
   const [userAge, setUserAge] = useState("");
   const [userActivities, setUserActivities] = useState("");
   const [userPicture, setUserPicture] = useState("");
@@ -17,16 +22,16 @@ function Login(props) {
    const [loginPassword, setLoginPassword] = useState("");
 
    const [data, setData] = useState(null)
-​
+
   if (registered) {
     return (
       <Redirect to='/flick'></Redirect>
     );
   }
-​
+
   const handleOnClick = (e) => {
     e.preventDefault();
-​
+
     let action = {
       name: userName,
       age: userAge,
@@ -56,8 +61,8 @@ function Login(props) {
     axios({
       method: "POST",
       data: {
-        username: registerUserName,
-        password: registerPassword
+        username: userName,
+        password: password
       },
       withCredentials: true,
       url: "http://localhost:4000/login",
@@ -69,8 +74,8 @@ function Login(props) {
     axios({
       method: "GET",
       data: {
-        username: registerUserName,
-        password: registerPassword
+        username: userName,
+        password: password
       },
       withCredentials: true,
       url: "http://localhost:4000/user",
@@ -78,13 +83,13 @@ function Login(props) {
       ((res) => setData(res.data));
   }
 
-​
+
   return (
     <div>
       <h1 className="loginH1">SoleMate</h1>
-​
+
       <br />
-​
+
       <form className="loginForm" noValidate autoComplete="off">
         <div className="inputField">
           <input
@@ -97,11 +102,23 @@ function Login(props) {
             onChange={(event) => setUserName(event.target.value)}
           />
         </div>
-​
+
         <div className="inputField">
           <input
             className="input"
             type="password"
+            id="password"
+            label="password"
+            placeholder="Password"
+            variant="outlined"
+            onChange={(event) => setPassword(event.target.value)}
+          />
+        </div>
+
+        <div className="inputField">
+          <input
+            className="input"
+            type="text"
             id="age"
             label="Age"
             placeholder="Age"
@@ -109,7 +126,7 @@ function Login(props) {
             onChange={(event) => setUserAge(event.target.value)}
           />
         </div>
-​
+
         <div className="inputField">
           <input
             className="input"
@@ -121,7 +138,7 @@ function Login(props) {
             onChange={(event) => setUserActivities(event.target.value)}
           />
         </div>
-​
+
         <div className="inputField">
           <input
             className="input"
@@ -133,7 +150,7 @@ function Login(props) {
             onChange={(event) => setUserPicture(event.target.value)}
           />
         </div>
-​
+
         <div className="submitButton">
           <Button
             onClick={handleOnClick}
@@ -149,5 +166,5 @@ function Login(props) {
     </div>
   );
 }
-​
+
 export default withRouter(Login);

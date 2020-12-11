@@ -2,20 +2,20 @@ import React from "react";
 import TinderCard from "react-tinder-card";
 import { ProfileContext } from '../../ProfileContext';
 import "./TinderCards.css";
-​
+  
 export default class TinderCards extends React.PureComponent {
   static contextType = ProfileContext;
-​
+    
   state = {
     people: []
   }
-​
+    
   componentDidMount() {
     const {users} = this.context;
     console.log('TinderCard users: ', users);
     this.setState({ people: users });
   }
-​
+    
   render() {
     console.log('render people: ', this.state.people);
     return (
@@ -41,13 +41,12 @@ export default class TinderCards extends React.PureComponent {
       </div>
     );
   }
-​
+    
   // same as this vvv
   // const people =[];
   // people.push("watever")
-​
+    
   //(push to an array in React)
   // setPeople([..people])
   // debugger;
 }
-export default TinderCards;
