@@ -15,7 +15,7 @@ function Header() {
             </IconButton>
             </Link>
             <h2 className="header__h">Find Sole-Mates</h2>
-            <Link to="/chat">
+            <Link to="/chatlogin">
             <IconButton>
                 <ChatBubbleIcon className="header__icon" fontSize="large" />
             </IconButton>
