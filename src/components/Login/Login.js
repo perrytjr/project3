@@ -101,7 +101,7 @@ function Login(props) {
         <div className="inputField">
           <input
             className="input"
-            type="text"
+            type="password"
             id="age"
             label="Age"
             placeholder="Age"
