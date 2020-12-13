@@ -1,18 +1,29 @@
 import React from 'react';
+import IconButton from '@material-ui/core/IconButton';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import { Link } from "react-router-dom";
 
 
 
 
 import './InfoBar.css';
 
-const InfoBar = ({ room }) => (
+const InfoBar = ({ room  }) => (
+
   <div className="infoBar">
-    <div className="leftInnerContainer">
-      <h3>{room}</h3>
+    <Link to="/chatlogin">
+      <IconButton  >
+        <ArrowBackIosIcon fontSize="large" className="exit__room" />
+      </IconButton>
+    </Link>
+    <div className="chatroom__name">
+      <h3>ChatRoom: {room}</h3>
     </div>
-    <div className="rightInnerContainer">
-    <a href='/chatlogin'> Exit</a>
-    </div>
+
+    
+
+
+
   </div>
 );
 

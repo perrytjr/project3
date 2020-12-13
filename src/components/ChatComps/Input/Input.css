@@ -1,14 +1,19 @@
 .form {
   display: flex;
-  border-top: 2px solid #D3D3D3;
+  padding: 5px;
+  position: fixed;
+  bottom: 0;
+  width: 90.5%;
+  border-top: 1px solid lightgray;
+left: 9.5%;
+  z-index: 1;
 }
 
 .input-chat {
-  border: none;
-  border-radius: 0;
-  padding: 5%;
-  width: 80%;
-  font-size: 1.2em;
+ flex: 1;
+ padding: 10px;
+ border: none;
+ height: 30px;
 }
 
 input:focus, textarea:focus, select:focus{
@@ -16,12 +21,10 @@ input:focus, textarea:focus, select:focus{
 }
 
 .sendButton {
-  color: #fff !important;
-  text-transform: uppercase;
-  text-decoration: none;
-  background: #2979FF;
-  padding: 20px;
-  display: inline-block;
-  border: none;
-  width: 20%;
+ border: none;
+ margin-right: 10px;
+ font-weight: bolder;
+ background-color: #0C1842;
+ width: 80px;
+ color: #FAF5CF;
 }
