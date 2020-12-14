@@ -1,3 +1,4 @@
+const http = require('http');
 const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
@@ -7,12 +8,14 @@ const cookieParser = require("cookie-parser");
 const bcrypt = require("bcryptjs");
 const session = require("express-session");
 const bodyParser = require("body-parser");
-const http = require('http');
+
 const socketio = require('socket.io');
 const router = require('./router');
 const app = express();
+const server = http.createServer(app);
+const io = socketio(server);
 const User = require("./models/user")
-const server = http.Server(app);
+
 
 
 
@@ -20,7 +23,7 @@ const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
 const { nextTick } = require("process");
 
 
-const io = socketio(server);
+
 
 app.listen(process.env.PORT || 4000, () => console.log(`Server has started.`));
 
@@ -95,7 +98,6 @@ app.use(
     credentials: true,
   })
 );
-
 app.use(
   session({
     secret: "secretcode",
@@ -103,7 +105,6 @@ app.use(
     saveUninitialized: true,
   })
 );
-
 app.use(cookieParser("secretcode"));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -112,6 +113,20 @@ passport.use(new LocalStrategy(User.authenticate()));
 
 
 //Routes:
+// app.post("/login", (req, res, next) => {
+//   passport.authenticate("local", (err, user, info) => {
+//     if (err) throw err;
+//     if (!user) res.send("No User Exists");
+//     else {
+//       req.logIn; (user, err) => {
+//         if (err) throw err;
+//         res.send("Successfully Authenticated")
+//         console.log(req.user);
+//       }
+//     }
+//   })
+//    (req, res, next)
+// });
 app.post("/login", (req, res, next) => {
   console.log("checkingDB", req.body)
   passport.authenticate("local", (err, user) => {
@@ -296,13 +311,4 @@ app.post("/User", (req, res) => {
 //   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 // });
 
-// // Serve up static assets (usually on heroku)
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static("client/build"));
-// };
 
-// // Connect to the Mongo DB
-// mongoose.connect(
-//   process.env.MONGODB_URI || "mongodb://localhost/soulmate",
-//   { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
-// );
