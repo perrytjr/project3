@@ -8,6 +8,10 @@ export default function SignIn() {
   const [room, setRoom] = useState('');
 
   return (
+  
+    
+
+
     <div className="joinOuterContainer">
       <div className="joinInnerContainer">
         <h1 className="heading">Join a ChatRoom</h1>

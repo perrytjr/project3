@@ -16,11 +16,11 @@ function ChatHeader(props) {
                 </IconButton>
             </Link>
             <h2 className="header__h">Messaging</h2>
-            
+            <Link to={`/chatroom?name=${props.setName}&room=${props.setRoom}`}>
                 <IconButton>
                     <ChatBubbleIcon className="header__icon" fontSize="large" />
                 </IconButton>
-        
+        </Link>
 
         </div>
     )
