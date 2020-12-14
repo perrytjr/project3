@@ -2,25 +2,89 @@ const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
 const passport = require("passport");
-const passportLocal = require("passport-local").Strategy;
+const LocalStrategy = require("passport-local").Strategy;
 const cookieParser = require("cookie-parser");
 const bcrypt = require("bcryptjs");
 const session = require("express-session");
 const bodyParser = require("body-parser");
-
+const http = require('http');
+const socketio = require('socket.io');
+const router = require('./router');
 const app = express();
 const User = require("./models/user")
+const server = http.Server(app);
 
+
+
+const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
+const { nextTick } = require("process");
+
+
+const io = socketio(server);
+
+app.listen(process.env.PORT || 4000, () => console.log(`Server has started.`));
+
+
+app.use(cors());
+app.use(router);
+
+io.on('connect', (socket) => {
+  socket.on('join', ({ name, room }, callback) => {
+    const { error, user } = addUser({ id: socket.id, name, room });
+
+    if (error) return callback(error);
+
+    socket.join(user.room);
+
+    socket.emit('message', { user: 'admin', text: `${user.name}, welcome to Chat Room "${user.room}."` });
+    socket.broadcast.to(user.room).emit('message', { user: 'admin', text: `${user.name} has joined!` });
+
+    io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room) });
+
+    callback();
+  });
+
+  socket.on('sendMessage', (message, callback) => {
+    const user = getUser(socket.id);
+
+    io.to(user.room).emit('message', { user: user.name, text: message });
+
+    callback();
+  });
+
+  socket.on('disconnect', () => {
+    const user = removeUser(socket.id);
+
+    if (user) {
+      io.to(user.room).emit('message', { user: 'Admin', text: `${user.name} has left.` });
+      io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room) });
+    }
+  })
+});
+
+
+// Connect to the Mongo DB
 mongoose.connect(
-  "mongodb+srv://user:user@cluster0.bp2cl.mongodb.net/solemate?retryWrites=true&w=majority",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  },
+  process.env.MONGODB_URI || "mongodb://localhost/soulmate",
+  { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true },
   () => {
     console.log("Mongoose is Connected");
   }
 );
+
+
+
+
+// mongoose.connect(
+//   "mongodb+srv://user:user@cluster0.bp2cl.mongodb.net/solemate?retryWrites=true&w=majority",
+//   {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   },
+//   () => {
+//     console.log("Mongoose is Connected");
+//   }
+// );
 
 //Middleware
 app.use(bodyParser.json());
@@ -41,51 +105,65 @@ app.use(
 );
 
 app.use(cookieParser("secretcode"));
-app.use(passport.initialize())
-app.use(passport.session)
-require('./passportConfig')(passport )
+app.use(passport.initialize());
+app.use(passport.session());
+require('./passportConfig'), (passport);
+passport.use(new LocalStrategy(User.authenticate()));
 
 
 //Routes:
 app.post("/login", (req, res, next) => {
-  passport.authenticate("local", (err, user, info) => {
-      if (err) throw err;
-      if(!user) res.send("No User Exists");
-      else{
-          req.logIn(user, err) => {
-              if (err) throw err;
-              res.send("Successfully Authenticated")
-              console.log(req.user);
-          }
-      }
+  console.log("checkingDB", req.body)
+  passport.authenticate("local", (err, user) => {
+    if (err) throw err;
+    if (!user) res.send("No User Exists");
+    else {
+      req.logIn; (user, (err) => {
+        if (err) throw err;
+        res.send("Successfully Authenticated")
+        console.log(req.user);
+      })
+    } console.log (req,user)
   }) 
-  (req, res, next)
+    (req, res, next)
 });
 
+
+
 app.post("/register", (req, res) => {
-  user.findOne({username: req.body.username}, (err,doc) => {
-      if (err) throw err;
-      if (doc) res.send("User Already Exists");
-      if (!doc){
-          const hashPassword = await bcrypt.hash(req.body.password, 10);
-          const newUser = new User({
-              username: req.body.username,
-              password: hashPassword,
-          });
-          await newUser.save();
-          res.send("User Created")
-      }
+  console.log("add req",req.body)
+  User.findOne({ username: req.body.username }, async (err, doc) => {
+   
+    if (err) throw err;
+    if (doc) res.send("User Already Exists");
+    if (!doc) { 
+      
+      const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
+      const newUser = new User({
+        username: req.body.username,
+        password: hashedPassword,
+        age: req.body.age,
+        // picture: userPicture,
+        activities: req.body.activities,
+      });
+      await newUser.save();
+      res.send("User Created");
+    }
   });
 });
 
-app.post("/user", (req, res) => {
-  res.send(req,user)
+app.post("/login", (req, res) => {
+    res.send(req.user);
 });
 
-//Start the Server
-app.listen(4000, () => {
-  console.log("Server Has Started");
+app.post("/User", (req, res) => {
+  res.send(req, user);
 });
+
+
+
+
 // const mongoose = require('mongoose');
 // const express = require('express');
 // const cors = require('cors');
@@ -202,10 +280,7 @@ app.listen(4000, () => {
 //       });
 //     }
 //   )});
-// app.post('/login', passport.authenticate('local'), function (req, res) {
-//   console.log(JSON.stringify(req.user));
-//   res.send(req.user);
-// });
+//
 // app.get('/logout', function (req, res) {
 //   console.log("BEFORE logout", req);
 //   req.logout();
