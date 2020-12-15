@@ -8,6 +8,9 @@ import InfoBar from '../ChatComps/InfoBar/InfoBar';
 import Input from '../ChatComps/Input/Input';
 
 import './ChatRoom.css';
+const ENDPOINT = "https://solemate-project3.herokuapp.com/";
+
+
 
 
 
@@ -20,7 +23,6 @@ const Chat = ({ location }) => {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
 
-  const ENDPOINT = "/";
 
   useEffect(() => {
     const { name, room } = queryString.parse(location.search);
