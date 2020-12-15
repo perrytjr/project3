@@ -35,8 +35,8 @@ function Login(props) {
     axios({
       method: "POST",
       data: {
-        username: loginUserName,
-        password: loginPassword,
+        username: userName,
+        password: password,
       },
       withCredentials: true,
       url: "/login",

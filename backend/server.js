@@ -65,8 +65,6 @@ io.on('connect', (socket) => {
   })
 });
 
-
-// Connect to the Mongo DB
 mongoose.connect(
   process.env.MONGODB_URI || "mongodb://localhost/soulmate",
   { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true },
@@ -113,20 +111,6 @@ passport.use(new LocalStrategy(User.authenticate()));
 
 
 //Routes:
-// app.post("/login", (req, res, next) => {
-//   passport.authenticate("local", (err, user, info) => {
-//     if (err) throw err;
-//     if (!user) res.send("No User Exists");
-//     else {
-//       req.logIn; (user, err) => {
-//         if (err) throw err;
-//         res.send("Successfully Authenticated")
-//         console.log(req.user);
-//       }
-//     }
-//   })
-//    (req, res, next)
-// });
 app.post("/login", (req, res, next) => {
   console.log("checkingDB", req.body)
   passport.authenticate("local", (err, user) => {
@@ -175,6 +159,10 @@ app.post("/login", (req, res) => {
 app.post("/User", (req, res) => {
   res.send(req, user);
 });
+
+app.listen(4000,() => {
+  console.log("server has started");
+})
 
 
 
