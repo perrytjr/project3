@@ -15,14 +15,14 @@ import "./App.css";
 function useImmerReducer(reducer, initialState) {
     return React.useReducer(produce(reducer), initialState);
 }
-const usersReducer = (users, action) => {
-    switch (action.type) {
+const usersReducer = (users, login) => {
+    switch (login.type) {
         case 'ADD_USER':
             users.push({
-                name: action.name,
-                age: action.age,
-                picture: action.picture,
-                activities: action.activities
+                name: login.name,
+                age: login.age,
+                picture: login.picture,
+                activities: login.activities
             });
             // Make a call to DB to insert the new user
             console.log('usersReducer users: ', users);
