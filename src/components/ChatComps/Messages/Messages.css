@@ -1,5 +1,11 @@
 .messages {
-    padding: 5% 0;
-    overflow: auto;
-    flex: auto;
+  padding: 5%;
+  justify-content: flex-start;
+  overflow: auto;
+  flex: auto;
+  padding-bottom: 0px;
+  padding-left: 200px;
+  height: calc(100vh - 140px);
+  padding-top: 80px;
+   
   }

@@ -3,17 +3,28 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px ;
+    background-color:#0C1842;
 }
 
 .header__h{
-    padding: 20px;;
+    padding: 20px;
+   color: #FAF5CF
+
 }
 
 .header__logo {
     height: 40px;
     object-fit: contain;
-    padding: 20px;;
+    padding: 20px;
+  
 }
 .header__icon {
- padding: 20px;;
+ padding: 20px;
+ color: #FAF5CF
+ ;
+}
+
+.header__ArrowIcon {
+    color: #FAF5CF
+    ;
 }
