@@ -19,8 +19,10 @@ const User = require("./models/user")
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
 
 
- server.listen(process.env.PORT || 4000, () => console.log(`Server has started.`));
-app.use(cors());
+//  server.listen(process.env.PORT || 4000, () => console.log(`Server has started.`));
+// app.use(cors());
+
+
 
 app.use(router);
 io.on('connect', (socket) => {
@@ -46,6 +48,7 @@ io.on('connect', (socket) => {
     }
   })
 });
+
 mongoose.connect(
   "mongodb+srv://user:user@cluster0.bp2cl.mongodb.net/solemate?retryWrites=true&w=majority",
   {
@@ -56,6 +59,7 @@ mongoose.connect(
     console.log("Mongoose is Connected");
   }
 );
+
 //Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -77,20 +81,6 @@ app.use(passport.initialize())
 app.use(passport.session)
 require('./passportConfig')
 //Routes:
-// app.post("/login", (req, res, next) => {
-//   passport.authenticate("local", (err, user, info) => {
-//     if (err) throw err;
-//     if (!user) res.send("No User Exists");
-//     else {
-//       req.logIn; (user, err) => {
-//         if (err) throw err;
-//         res.send("Successfully Authenticated")
-//         console.log(req.user);
-//       }
-//     }
-//   })
-//    (req, res, next)
-// });
 app.post("/login", (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
       if (err) throw err;
@@ -123,5 +113,9 @@ app.post("/register",  (req, res) => {
 app.post("/user", (req, res) => {
   res.send(req, user)
 });
+
+app.listen(4000,() => {
+  console.log("server has started");
+})
 
 

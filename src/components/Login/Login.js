@@ -19,33 +19,19 @@ function Login(props) {
   const [loginUserName, setLoginUserName] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
-  const [data, setData] = useState(null);
 
   if (registered) {
     return <Redirect to="/flick"></Redirect>;
   }
 
-  const handleOnClick = (e) => {
-    e.preventDefault();
-
-    let action = {
-      name: userName,
-      age: userAge,
-      picture: userPicture,
-      activities: userActivities,
-      type: "ADD_USER",
-    };
-    dispatch(action);
-    setRegistered(true);
-  };
 
   //routes:
   const register = () => {
     axios({
       method: "POST",
       data: {
-        username: loginUserName,
-        password: loginPassword,
+        username: userName,
+        password: password,
       },
       withCredentials: true,
       url: "http://localhost:4000/register",
@@ -56,95 +42,137 @@ function Login(props) {
     axios({
       method: "POST",
       data: {
-        username: userName,
-        password: password,
+        username: loginUserName,
+        password:loginPassword,
+        age: userAge,
+        picture: userPicture,
+        activities: userActivities,
+        type: "ADD_USER",
       },
       withCredentials: true,
       url: "http://localhost:4000/login",
     }).then((res) => console.log(res));
+    dispatch(login.data);
+    setRegistered(true);
   };
 
-  const getUser = () => {
-    axios({
-      method: "GET",
-      data: {
-        username: userName,
-        password: password,
-      },
-      withCredentials: true,
-      url: "http://localhost:4000/user",
-    }).then((res) => setData(res.data));
-  };
   return (
-    <form className="loginForm" noValidate autoComplete="off">
-      <div className="inputField">
-        <input
-          className="input"
-          type="text"
-          id="fullName"
-          label="Full Name"
-          placeholder="Full Name"
-          variant="outlined"
-          onChange={(event) => setUserName(event.target.value)}
-        />
-      </div>
-      <div className="inputField">
-        <input
-          className="input"
-          type="password"
-          id="password"
-          label="password"
-          placeholder="Password"
-          variant="outlined"
-          onChange={(event) => setPassword(event.target.value)}
-        />
-      </div>
-      <div className="inputField">
-        <input
-          className="input"
-          type="text"
-          id="age"
-          label="Age"
-          placeholder="Age"
-          variant="outlined"
-          onChange={(event) => setUserAge(event.target.value)}
-        />
-      </div>
-      <div className="inputField">
-        <input
-          className="input"
-          type="text"
-          id="activites"
-          label="Activities"
-          placeholder="Activities"
-          variant="outlined"
-          onChange={(event) => setUserActivities(event.target.value)}
-        />
-      </div>
-      <div className="inputField">
-        <input
-          className="input"
-          type="input"
-          id="picture"
-          label="Picture"
-          placeholder="Picture URL"
-          variant="outlined"
-          onChange={(event) => setUserPicture(event.target.value)}
-        />
-      </div>
+    <div className="app">
+      <h1>SoleMate</h1>
+      <h2>Registration:</h2>
+      <form className="loginForm" noValidate autoComplete="off">
+        <div className="inputField">
+          <input
+            className="input"
+            type="text"
+            id="fullNameReg"
+            label="Full Name"
+            placeholder="Full Name"
+            variant="outlined"
+            onChange={(e) => setUserName(e.target.value)}
+            required
+          />
+        </div>
+        <div className="inputField">
+          <input
+            className="input"
+            type="password"
+            id="passwordReg"
+            label="password"
+            placeholder="Password"
+            variant="outlined"
+            required
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <div className="inputField">
+          <input
+            className="input"
+            type="text"
+            id="age"
+            label="Age"
+            placeholder="Age"
+            variant="outlined"
+            onChange={(e) => setUserAge(e.target.value)}
+          />
+        </div>
+        <div className="inputField">
+          <input
+            className="input"
+            type="text"
+            id="activites"
+            label="Activities"
+            placeholder="Activities"
+            variant="outlined"
+            onChange={(e) => setUserActivities(e.target.value)}
+          />
+        </div>
+        <div className="inputField">
+          <input
+            className="input"
+            type="input"
+            id="picture"
+            label="Picture"
+            placeholder="Picture URL"
+            variant="outlined"
+            onChange={(e) => setUserPicture(e.target.value)}
+          />
+        </div>
 
-      <div className="submitButton">
-        <Button
-          onClick={handleOnClick}
-          className="btn"
-          type="text"
-          variant="contained"
-          color="primary"
-        >
-          Enter
-        </Button>
+        <div className="submitButton">
+          <Button
+            onClick={register}
+            className="btn"
+            type="text"
+            variant="contained"
+            color="primary"
+          >
+            Enter
+          </Button>
+        </div>
+      </form>
+
+      <div>
+        <h2>Sign In:</h2>
+        <form className="loginForm" noValidate autoComplete="off">
+          <div className="inputField">
+            <input
+              className="input"
+              type="text"
+              id="fullName"
+              label="Full Name"
+              placeholder="Full Name"
+              variant="outlined"
+              onChange={(e) => setLoginUserName(e.target.value)}
+            />
+          </div>
+
+          <div className="inputField">
+            <input
+              className="input"
+              type="password"
+              id="password"
+              label="password"
+              placeholder="Password"
+              variant="outlined"
+              onChange={(e) => setLoginPassword(e.target.value)}
+            />
+          </div>
+
+          <div className="submitButton">
+            <Button
+              onClick={login}
+              className="btn"
+              type="text"
+              variant="contained"
+              color="primary"
+            >
+              Enter
+            </Button>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   );
 }
 
