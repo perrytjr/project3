@@ -39,6 +39,9 @@ function Login(props) {
       url: "/login",
     }).then((res) => console.log(res));
     setAuthenticated(true);
+    dispatch(login);
+    setRegistered(true)
+
   };
 
   const register = () => {
@@ -56,8 +59,6 @@ function Login(props) {
       withCredentials: true,
       url: "/register",
     }).then((res) => console.log(res));
-    dispatch(login);
-    setRegistered(true);
   };
 
   return (
