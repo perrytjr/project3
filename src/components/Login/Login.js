@@ -14,7 +14,6 @@ function Login(props) {
   const [userAge, setUserAge] = useState("");
   const [userActivities, setUserActivities] = useState("");
   const [userPicture, setUserPicture] = useState("");
-  const [registered, setRegistered] = useState(false);
   const [authenticated, setAuthenticated] = useState(false);
   const [loginUserName, setLoginUserName] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
@@ -40,7 +39,6 @@ function Login(props) {
     }).then((res) => console.log(res));
     setAuthenticated(true);
     dispatch(login);
-    registered(true)
 
   };
 
