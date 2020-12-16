@@ -12,7 +12,7 @@ const bodyParser = require("body-parser");
 const socketio = require('socket.io');
 const router = require('./router');
 const app = express();
-const server = http.createServer(app);
+const server = app.listen(process.env.PORT || 4000, () => console.log(`Server has started.`));
 const io = socketio(server);
 const User = require("./models/user")
 
@@ -25,7 +25,6 @@ const { nextTick } = require("process");
 
 
 
-app.listen(process.env.PORT || 4000, () => console.log(`Server has started.`));
 
 
 app.use(cors());
@@ -65,27 +64,26 @@ io.on('connect', (socket) => {
   })
 });
 
-mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/soulmate",
-  { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true },
-  () => {
-    console.log("Mongoose is Connected");
-  }
-);
-
-
-
-
+//local:
 // mongoose.connect(
-//   "mongodb+srv://user:user@cluster0.bp2cl.mongodb.net/solemate?retryWrites=true&w=majority",
-//   {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//   },
+//   process.env.MONGODB_URI || "mongodb://localhost/soulmate",
+//   { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true },
 //   () => {
 //     console.log("Mongoose is Connected");
 //   }
 // );
+
+//atlas:
+mongoose.connect(
+  "mongodb+srv://user:user@cluster0.bp2cl.mongodb.net/solemate?retryWrites=true&w=majority",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  },
+  () => {
+    console.log("Mongoose is Connected");
+  }
+);
 
 //Middleware
 app.use(bodyParser.json());
@@ -93,26 +91,24 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   cors({
     origin: "https://localhost:3000",
-    credentials: true,
+    credentials: true
   })
 );
 app.use(
   session({
     secret: "secretcode",
     resave: true,
-    saveUninitialized: true,
+    saveUninitialized: true
   })
 );
 app.use(cookieParser("secretcode"));
 app.use(passport.initialize());
 app.use(passport.session());
-require('./passportConfig'), (passport);
-passport.use(new LocalStrategy(User.authenticate()));
+require('./passportConfig')(passport);
 
 
 //Routes:
 app.post("/login", (req, res, next) => {
-  console.log("checkingDB", req.body)
   passport.authenticate("local", (err, user) => {
     if (err) throw err;
     if (!user) res.send("No User Exists");
@@ -143,7 +139,7 @@ app.post("/register", (req, res) => {
         username: req.body.username,
         password: hashedPassword,
         age: req.body.age,
-        // picture: userPicture,
+        picture: req.body.userPicture,
         activities: req.body.activities,
       });
       await newUser.save();
@@ -159,144 +155,4 @@ app.post("/login", (req, res) => {
 app.post("/User", (req, res) => {
   res.send(req, user);
 });
-
-// app.listen(4000,() => {
-//   console.log("server has started");
-// })
-
-
-
-
-// const mongoose = require('mongoose');
-// const express = require('express');
-// const cors = require('cors');
-// const passport = require('passport');
-// const passportLocal = require('passport-local').Strategy;
-// const cookieParser = require('cookie-parser');
-// const bcrypt = require('bcryptjs');
-// const session = require('express-session');
-// const bodyParser = require('body-parser');
-
-// const app = express();
-
-// //Middleware
-// app.use(bodyParser.json())
-// app.use(bodyParser.urlencoded({extended: true}))
-// app.use(cors({
-//     origin: "https://localhost:3000",
-//     credentials: true,
-// }))
-
-// app.use(session({
-//     secret: "secretcode",
-//     resave: true,
-//     saveUninitialized: true
-// }))
-
-// app.use(cookieParser("secretcode"))
-
-// //Routes:
-// app.post("/login", (req, res) => {
-//     console.log(req.body);
-// })
-
-// app.post("/register", (req, res) => {
-//     console.log(req.body);
-// })
-
-// app.post("/user", (req, res) => {
-//     console.log(req.body);
-// })
-
-
-// //Start the Server
-// app.listen(4000, () => {
-//     console.log('Server Has Started');
-// })
-
-// var express = require('express'),
-//   mongoose = require('mongoose'),
-//   db = require('./models'),
-//   controllers = require('./controllers'),
-//   bodyParser = require('body-parser'),
-//   vegetable = require('./models/vegetable'),
-//   cookieParser = require('cookie-parser'),
-//   session = require('express-session'),
-//   passport = require('passport'),
-//   LocalStrategy = require('passport-local').Strategy;
-
-//  const PORT = process.env.PORT || 3001;
-
-//  var app = express(),
-//   router = express.Router();
-
-// var User = db.User;
-
-// // Define middleware here
-// app.use(express.urlencoded({ extended: true }));
-// app.use(express.json());
-
-// // // Use apiRoutes
-// // app.use("/api", apiRoutes);
-
-// //to config API to use body body-parser and look for JSON in req.body
-// app.use(bodyParser.urlencoded({
-//   extended: true
-// }));
-// app.use(bodyParser.json());
-
-// app.use(cookieParser());
-// app.use(session({
-//   secret: 'spinachsecret007', // change this!
-//   resave: false,
-//   saveUninitialized: false
-// }));
-// app.use(passport.initialize());
-// app.use(passport.session());
-
-// //passport config
-// passport.use(new LocalStrategy(db.User.authenticate()));
-// passport.serializeUser(db.User.serializeUser());
-// passport.deserializeUser(db.User.deserializeUser());
-
-// //Prevent CORS errors
-// app.use(function (req, res, next) {
-//   res.setHeader('Access-Control-Allow-Origin', '*');
-//   res.setHeader('Access-Control-Allow-Credentials', 'true');
-//   res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT,DELETE');
-//   res.setHeader('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers');
-
-//   //Remove caching
-//   res.setHeader('Cache-Control', 'no-cache');
-//   next();
-// });
-
-// //auth routes
-// app.get('/api/users', controllers.user.index);
-// app.delete('/api/users/:user_id',controllers.user.destroy);
-// app.post('/signup', function signup(req, res) {
-//   console.log(`${req.body.username} ${req.body.password}`);
-//   User.register(new User({ username: req.body.username }), req.body.password,
-//     function (err, newUser) {
-//       passport.authenticate('local')(req, res, function() {
-//         res.send(newUser);
-//       });
-//     }
-//   )});
-//
-// app.get('/logout', function (req, res) {
-//   console.log("BEFORE logout", req);
-//   req.logout();
-//   res.send(req);
-//   console.log("AFTER logout", req);
-// });
-
-// app.listen(PORT, function() {
-//   console.log(`api running on ${PORT}`);
-// });
-
-// app.get("*", function(req, res) {
-//   res.sendFile(path.join(__dirname, "./client/build/index.html"));
-// });
-
 
