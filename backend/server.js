@@ -12,7 +12,7 @@ const bodyParser = require("body-parser");
 const socketio = require('socket.io');
 const router = require('./router');
 const app = express();
-const server = app.listen(process.env.PORT || 4000, () => console.log(`Server has started.`));
+const server = app.listen(process.env.MONGODB_URI || 4000, () => console.log(`Server has started.`));
 const io = socketio(server);
 const User = require("./models/user")
 
