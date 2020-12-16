@@ -14,17 +14,17 @@ function Login(props) {
   const [userAge, setUserAge] = useState("");
   const [userActivities, setUserActivities] = useState("");
   const [userPicture, setUserPicture] = useState("");
-  // const [registered, setRegistered] = useState(false);
-  // const [authenticated, setAuthenticated] = useState(false);
+  const [registered, setRegistered] = useState(false);
+  const [authenticated, setAuthenticated] = useState(false);
   const [loginUserName, setLoginUserName] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
-  // if (registered) {
-  //   return <Redirect to="/flick"></Redirect>;
-  // }
-  // if (authenticated) {
-  //   return <Redirect to="/flick"></Redirect>;
-  // }
+  if (registered) {
+    return <Redirect to="/flick"></Redirect>;
+  }
+  if (authenticated) {
+    return <Redirect to="/flick"></Redirect>;
+  }
 
   //routes:
   const login = () => {
@@ -38,7 +38,7 @@ function Login(props) {
       withCredentials: true,
       url: "/login",
     }).then((res) => console.log(res));
-    // setAuthenticated(true);
+    setAuthenticated(true);
     dispatch(login);
 
   };

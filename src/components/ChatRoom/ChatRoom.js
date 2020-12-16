@@ -18,7 +18,7 @@ const Chat = ({ location }) => {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
 
-  const ENDPOINT = "/";
+  const ENDPOINT = " https://solemate-project3.herokuapp.com";
 
   useEffect(() => {
     const { name, room } = queryString.parse(location.search);
