@@ -11,7 +11,6 @@ import './ChatRoom.css';
 
 let socket  ;
 
-const ENDPOINT = "https://solemate-project3.herokuapp.com/chatroom";
 
 
 const Chat = ({ location }) => {
@@ -21,6 +20,7 @@ const Chat = ({ location }) => {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
 
+  const ENDPOINT = "https://solemate-project3.herokuapp.com/chatroom";
 
   useEffect(() => {
     const { name, room } = queryString.parse(location.search);
