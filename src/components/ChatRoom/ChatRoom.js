@@ -11,7 +11,7 @@ import './ChatRoom.css';
 
 let socket  ;
 
-const ENDPOINT = "https://solemate-project3.herokuapp.com";
+const ENDPOINT = "https://solemate-project3.herokuapp.com/chatroom";
 
 
 const Chat = ({ location }) => {
