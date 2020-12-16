@@ -9,7 +9,6 @@ import Input from '../ChatComps/Input/Input';
 
 import './ChatRoom.css';
 
-const ENDPOINT = "https://solemate-project3.herokuapp.com/chatroom";
 
 
 let socket  ;
@@ -23,6 +22,8 @@ const Chat = ({ location }) => {
   const [users, setUsers] = useState('');
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
+
+  const ENDPOINT = "/";
 
 
   useEffect(() => {
