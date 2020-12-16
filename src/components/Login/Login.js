@@ -1,4 +1,3 @@
-
 //Marc's Code with Passport Authentication:
 import React, { useState, useContext } from "react";
 import Button from "@material-ui/core/Button";
@@ -20,7 +19,6 @@ function Login(props) {
   const [loginUserName, setLoginUserName] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
-
   if (registered) {
     return <Redirect to="/flick"></Redirect>;
   }
@@ -28,10 +26,9 @@ function Login(props) {
     return <Redirect to="/flick"></Redirect>;
   }
 
-
   //routes:
   const login = () => {
-    console.log(loginUserName, loginPassword)
+    console.log(loginUserName, loginPassword);
     axios({
       method: "POST",
       data: {
@@ -61,91 +58,93 @@ function Login(props) {
     }).then((res) => console.log(res));
     dispatch(login);
     setRegistered(true);
-
   };
 
   return (
-    <div>
-      <h1>SoleMate</h1>
-      <h2>Registration:</h2>
-      <form className="loginForm" noValidate autoComplete="off">
-        <div className="inputField">
-          <input
-            className="input"
-            type="text"
-            id="fullName"
-            label="Full Name"
-            placeholder="Full Name"
-            variant="outlined"
-            onChange={(event) => setUserName(event.target.value)}
-          />
-        </div>
-        <div className="inputField">
-          <input
-            className="input"
-            type="password"
-            id="password"
-            label="password"
-            placeholder="Password"
-            variant="outlined"
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </div>
-        <div className="inputField">
-          <input
-            className="input"
-            type="text"
-            id="age"
-            label="Age"
-            placeholder="Age"
-            variant="outlined"
-            onChange={(event) => setUserAge(event.target.value)}
-          />
-        </div>
-        <div className="inputField">
-          <input
-            className="input"
-            type="text"
-            id="activites"
-            label="Activities"
-            placeholder="Activities"
-            variant="outlined"
-            onChange={(event) => setUserActivities(event.target.value)}
-          />
-        </div>
-        <div className="inputField">
-          <input
-            className="input"
-            type="input"
-            id="picture"
-            label="Picture"
-            placeholder="Picture URL"
-            variant="outlined"
-            onChange={(event) => setUserPicture(event.target.value)}
-          />
-        </div>
+    <div className="app">
+      <h1 className="title">SoleMate</h1>
 
-        <div className="submitButton">
-          <Button
-            onClick={register}
-            className="btn"
-            type="text"
-            variant="contained"
-            color="primary"
-          >
-            Enter
-          </Button>
-        </div>
-      </form>
-
-      <div>
-        <h2>Sign In:</h2>
+      <div className="register">
         <form className="loginForm" noValidate autoComplete="off">
+        <h2 className="hTag">Registration:</h2>
           <div className="inputField">
             <input
               className="input"
               type="text"
               id="fullName"
+              label="Full Name"
+              placeholder="Full Name"
+              variant="outlined"
+              onChange={(event) => setUserName(event.target.value)}
+            />
+          </div>
+          <div className="inputField">
+            <input
+              className="input"
+              type="password"
+              id="password"
+              label="password"
+              placeholder="Password"
+              variant="outlined"
+              onChange={(event) => setPassword(event.target.value)}
+            />
+          </div>
+          <div className="inputField">
+            <input
+              className="input"
+              type="text"
+              id="age"
+              label="Age"
+              placeholder="Age"
+              variant="outlined"
+              onChange={(event) => setUserAge(event.target.value)}
+            />
+          </div>
+          <div className="inputField">
+            <input
+              className="input"
+              type="text"
+              id="activites"
+              label="Activities"
+              placeholder="Activities"
+              variant="outlined"
+              onChange={(event) => setUserActivities(event.target.value)}
+            />
+          </div>
+          <div className="inputField">
+            <input
+              className="input"
+              type="input"
+              id="picture"
+              label="Picture"
+              placeholder="Picture URL"
+              variant="outlined"
+              onChange={(event) => setUserPicture(event.target.value)}
+            />
+          </div>
+
+          <div className="submitButton">
+            <Button
+              onClick={register}
+              className="btn"
+              type="text"
+              variant="contained"
+              color="primary"
+            >
+              Enter
+            </Button>
+          </div>
+        </form>
+      </div>
+
+      <div className="signin">
+        <form className="loginForm" noValidate autoComplete="off">
+        <h2 className="hTag">Sign In:</h2>
+          <div className="inputField">
+            <input
+              className="input"
+              type="text"
+              id="loginFullName"
               label="Full Name"
               placeholder="Full Name"
               variant="outlined"
@@ -157,7 +156,7 @@ function Login(props) {
             <input
               className="input"
               type="password"
-              id="password"
+              id="loginPassword"
               label="password"
               placeholder="Password"
               variant="outlined"
@@ -183,384 +182,3 @@ function Login(props) {
 }
 
 export default withRouter(Login);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// //Marc's Code with Passport Authentication:
-// import React, { useState, useContext } from "react";
-// import Button from "@material-ui/core/Button";
-// import { withRouter, Redirect } from "react-router-dom";
-// import { ProfileContext } from "../../ProfileContext";
-// import "./Login.css";
-// import axios from "axios";
-// //Registration State:
-// function Login(props) {
-//   const { dispatch } = useContext(ProfileContext);
-//   const [userName, setUserName] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [userAge, setUserAge] = useState("");
-//   const [userActivities, setUserActivities] = useState("");
-//   const [userPicture, setUserPicture] = useState("");
-//   const [registered, setRegistered] = useState(false);
-
-//   const [loginUserName, setLoginUserName] = useState("");
-//   const [loginPassword, setLoginPassword] = useState("");
-
-//   const [data, setData] = useState(null);
-
-//   if (registered) {
-//     return <Redirect to="/flick"></Redirect>;
-//   }
-
-//   const handleOnClick = (e) => {
-//     e.preventDefault();
-
-//     let action = {
-//       name: userName,
-//       age: userAge,
-//       picture: userPicture,
-//       activities: userActivities,
-//       type: "ADD_USER",
-//     };
-//     dispatch(action);
-//     setRegistered(true);
-//   };
-
-//   //routes:
-//   const register = () => {
-//     axios({
-//       method: "POST",
-//       data: {
-//         username: loginUserName,
-//         password: loginPassword,
-//       },
-//       withCredentials: true,
-//       url: "http://localhost:4000/register",
-//     }).then((res) => console.log(res));
-//   };
-
-//   const login = () => {
-//     axios({
-//       method: "POST",
-//       data: {
-//         username: userName,
-//         password: password,
-//       },
-//       withCredentials: true,
-//       url: "http://localhost:4000/login",
-//     }).then((res) => console.log(res));
-//   };
-
-//   const getUser = () => {
-//     axios({
-//       method: "GET",
-//       data: {
-//         username: userName,
-//         password: password,
-//       },
-//       withCredentials: true,
-//       url: "http://localhost:4000/user",
-//     }).then((res) => setData(res.data));
-//   };
-//   return (
-//     <div>
-//       <h1>SoleMate</h1>
-//       <h2>Registration:</h2>
-//       <form className="loginForm" noValidate autoComplete="off">
-//         <div className="inputField">
-//           <input
-//             className="input"
-//             type="text"
-//             id="fullName"
-//             label="Full Name"
-//             placeholder="Full Name"
-//             variant="outlined"
-//             onChange={(event) => setUserName(event.target.value)}
-//           />
-//         </div>
-//         <div className="inputField">
-//           <input
-//             className="input"
-//             type="password"
-//             id="password"
-//             label="password"
-//             placeholder="Password"
-//             variant="outlined"
-//             onChange={(event) => setPassword(event.target.value)}
-//           />
-//         </div>
-//         <div className="inputField">
-//           <input
-//             className="input"
-//             type="text"
-//             id="age"
-//             label="Age"
-//             placeholder="Age"
-//             variant="outlined"
-//             onChange={(event) => setUserAge(event.target.value)}
-//           />
-//         </div>
-//         <div className="inputField">
-//           <input
-//             className="input"
-//             type="text"
-//             id="activites"
-//             label="Activities"
-//             placeholder="Activities"
-//             variant="outlined"
-//             onChange={(event) => setUserActivities(event.target.value)}
-//           />
-//         </div>
-//         <div className="inputField">
-//           <input
-//             className="input"
-//             type="input"
-//             id="picture"
-//             label="Picture"
-//             placeholder="Picture URL"
-//             variant="outlined"
-//             onChange={(event) => setUserPicture(event.target.value)}
-//           />
-//         </div>
-
-//         <div className="submitButton">
-//           <Button
-//             onClick={handleOnClick}
-//             className="btn"
-//             type="text"
-//             variant="contained"
-//             color="primary"
-//           >
-//             Enter
-//           </Button>
-//         </div>
-//       </form>
-
-//       <div>
-//         <h2>Sign In:</h2>
-//         <form className="loginForm" noValidate autoComplete="off">
-//           <div className="inputField">
-//             <input
-//               className="input"
-//               type="text"
-//               id="fullName"
-//               label="Full Name"
-//               placeholder="Full Name"
-//               variant="outlined"
-//               onChange={(event) => setLoginUserName(event.target.value)}
-//             />
-//           </div>
-
-//           <div className="inputField">
-//             <input
-//               className="input"
-//               type="password"
-//               id="password"
-//               label="password"
-//               placeholder="Password"
-//               variant="outlined"
-//               onChange={(event) => setLoginPassword(event.target.value)}
-//             />
-//           </div>
-
-//           <div className="submitButton">
-//             <Button
-//               onClick={getUser}
-//               className="btn"
-//               type="text"
-//               variant="contained"
-//               color="primary"
-//             >
-//               Enter
-//             </Button>
-//           </div>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default withRouter(Login);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// //Marc's Code with Passport Authentication:
-// import React, { useState, useContext } from "react";
-// import Button from "@material-ui/core/Button";
-// import { withRouter, Redirect } from "react-router-dom";
-// import { ProfileContext } from "../../ProfileContext";
-// import "./Login.css";
-// import axios from "axios";
-
-// //Registration State:
-// function Login(props) {
-//   const { dispatch } = useContext(ProfileContext);
-//   const [userName, setUserName] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [userAge, setUserAge] = useState("");
-//   const [userActivities, setUserActivities] = useState("");
-//   const [userPicture, setUserPicture] = useState("");
-//   const [registered, setRegistered] = useState(false);
-
-//   const [loginUserName, setLoginUserName] = useState("");
-//   const [loginPassword, setLoginPassword] = useState("");
-
-//   const [data, setData] = useState(null);
-
-//   if (registered) {
-//     return <Redirect to="/flick"></Redirect>;
-//   }
-
-//   // const handleOnClick = (e) => {
-//   //   e.preventDefault();
-
-//   //   let action = {
-//   //     name: userName,
-//   //     age: userAge,
-//   //     picture: userPicture,
-//   //     activities: userActivities,
-//   //     type: "ADD_USER",
-//   //   };
-//   //   dispatch(action);
-//   //   setRegistered(true);
-//   // };
-
-//   //routes:
-//   const register = () => {
-//     axios({
-//       method: "POST",
-//       data: {
-//         username: loginUserName,
-//         password: loginPassword,
-//       },
-//       withCredentials: true,
-//       url: "http://localhost:4000/register",
-//     }).then((res) => console.log(res));
-//     dispatch(data);
-//       setRegistered(true);
-//   };
-
-//   const login = () => {
-//     axios({
-//       method: "POST",
-//       data: {
-//         username: userName,
-//         password: password,
-//       },
-//       withCredentials: true,
-//       url: "http://localhost:4000/login",
-//     }).then((res) => console.log(res));
-//   };
-
-//   const getUser = () => {
-//     axios({
-//       method: "GET",
-//       data: {
-//         username: userName,
-//         password: password,
-//       },
-//       withCredentials: true,
-//       url: "http://localhost:4000/user",
-//     }).then((res) => setData(res.data));
-//   };
-//   return (
-//     <form className="loginForm" noValidate autoComplete="off">
-//       <div className="inputField">
-//         <input
-//           className="input"
-//           type="text"
-//           id="fullName"
-//           label="Full Name"
-//           placeholder="Full Name"
-//           variant="outlined"
-//           onChange={(event) => setLoginUserName(event.target.value)}
-//         />
-//       </div>
-//       <div className="inputField">
-//         <input
-//           className="input"
-//           type="password"
-//           id="password"
-//           label="password"
-//           placeholder="Password"
-//           variant="outlined"
-//           onChange={(event) => setLoginPassword(event.target.value)}
-//         />
-//       </div>
-//       <div className="inputField">
-//         <input
-//           className="input"
-//           type="text"
-//           id="age"
-//           label="Age"
-//           placeholder="Age"
-//           variant="outlined"
-//           onChange={(event) => setUserAge(event.target.value)}
-//         />
-//       </div>
-//       <div className="inputField">
-//         <input
-//           className="input"
-//           type="text"
-//           id="activites"
-//           label="Activities"
-//           placeholder="Activities"
-//           variant="outlined"
-//           onChange={(event) => setUserActivities(event.target.value)}
-//         />
-//       </div>
-//       <div className="inputField">
-//         <input
-//           className="input"
-//           type="input"
-//           id="picture"
-//           label="Picture"
-//           placeholder="Picture URL"
-//           variant="outlined"
-//           onChange={(event) => setUserPicture(event.target.value)}
-//         />
-//       </div>
-
-//       <div className="submitButton">
-//         <Button
-//           onClick={register}
-//           className="btn"
-//           type="text"
-//           variant="contained"
-//           color="primary"
-//         >
-//           Enter
-//         </Button>
-//       </div>
-//     </form>
-//   );
-// }
-
-// export default withRouter(Login);

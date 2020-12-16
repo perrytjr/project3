@@ -3,5 +3,17 @@
     justify-content: center;
 }
 
+.hTag{
+    color:black;
+    text-align:center;
+    text-shadow: 2px 2px 5px grey;
+}
 
+.title{
+    font-weight: bolder;
+    text-align:center;
+    color:cornflowerblue;
+    text-decoration:underline;
+    text-shadow: 2px 2px 5px black;
 
+}

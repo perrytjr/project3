@@ -21,20 +21,20 @@ html,
   background-color: #C1E3F1;
 }
 
-.inputField {
-  padding-top: 16px;
+.loginForm{
+  float:left;
+  width:45%;
+  padding: 10px 10px 20px 10px;
+  margin:15px;
+  box-shadow: 10px 10px 5px #aaaaaa;
+  border: 1px solid #BFBFBF;
+
+
 }
 
-.input {
-  box-sizing: border-box;
-  outline: none;
-  border: solid 2px #B35619;
-  border-radius: 4px;
-  color: #292929;
-  width: 100%;
-  padding: 12px;
-  font-size: 14px;
-  background: rgba(255, 255, 255, 1);
+
+.inputField {
+  padding-top: 16px;
 }
 
 .input {
@@ -65,3 +65,4 @@ html,
 .submitButton {
   padding-top: 16px;
 }
+
