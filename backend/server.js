@@ -8,11 +8,13 @@ const cookieParser = require("cookie-parser");
 const bcrypt = require("bcryptjs");
 const session = require("express-session");
 const bodyParser = require("body-parser");
+const uri = process.env.MONGODB_URI;
+
 
 const socketio = require('socket.io');
 const router = require('./router');
 const app = express();
-const server = app.listen(process.env.MONGODB_URI || 4000, () => console.log(`Server has started.`));
+const server = app.listen(uri || 4000, () => console.log(`Server has started.`));
 const io = socketio(server);
 const User = require("./models/user")
 
